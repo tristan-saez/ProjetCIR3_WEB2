@@ -1,9 +1,15 @@
+body{
+  font-family: "Inter", sans-serif; 
+  padding: 0;
+  margin: 0;
+
+}
+
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  font-family: "Inter", sans-serif; 
   display: flex;
   align-items: center;
 }
@@ -46,4 +52,44 @@ li a[href="#about"]:hover {
 li a[href="#Rien"]{
   font-size: 24px;
   color: #426B1F;
+}
+
+.center {
+  text-align: center;
+  margin-top: 75px;
+  font-size: 48px;
+}
+
+a[href="#visualisation"]{ text-decoration: none;
+  color: white;
+background-color: #426B1F;
+font-size: 20px;
+padding: 12px 8px;
+border-radius: 8px;}
+
+.map{
+  text-align: center;
+}
+
+.map_img{
+  margin-top: 75px;
+}
+
+figcaption{
+  margin-top: 10px;
+}
+
+footer{
+  background-color: #1E1E1E;
+  text-align: center;
+}
+
+footer p {
+  color: white ;
+  padding: 0;
+  margin: 0;
+}
+
+footer img{
+  margin-top: 25px;
 }
