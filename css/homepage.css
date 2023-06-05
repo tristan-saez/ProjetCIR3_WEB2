@@ -1,0 +1,49 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: "Inter", sans-serif; 
+  display: flex;
+  align-items: center;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: #333;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #ddd;
+}
+
+.left-side {
+  float: left;
+}
+
+.right-side {
+  margin-left: 600px;  
+}
+
+li a[href="#about"] {
+  background-color: #426B1F;
+  color: white;
+  border-radius: 8px;
+}
+
+li a[href="#about"]:hover {
+  background-color: #599A22;
+  
+}
+
+li a[href="#Rien"]{
+  font-size: 24px;
+  color: #426B1F;
+}
