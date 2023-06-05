@@ -1,0 +1,93 @@
+body{
+    font-family: "Inter", sans-serif; 
+    padding: 0;
+    margin: 0;
+  
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: #333;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover {
+    background-color: #ddd;
+  }
+  
+  .left-side {
+    float: left;
+  }
+  
+  .right-side {
+    margin-left: 600px;  
+  }
+
+  li a[href="#Profil"] {
+    background-color: #426B1F;
+    color: white;
+    border-radius: 8px;
+  }
+  
+  li a[href="#Profil"]:hover {
+    background-color: #599A22;
+    
+  }
+  
+  li a[href="#Rien"]{
+    font-size: 24px;
+    color: #426B1F;
+  }
+
+  .center {
+    text-align: center;
+    margin-top: 75px;
+    font-size: 48px;
+    font-family: "Newsreader", sans-serif;
+  }
+
+  .header-filter{
+    display: flex;
+    flex-direction: row;
+    margin-left: 70px;
+    border-bottom: #E6E6E6 solid 2px;
+  }
+
+  h3{
+    font-size: 34px;
+  }
+
+  .header-filter p{
+    margin-left: 12px;
+    margin-top: 50px;
+  }
+
+  .filter{
+    margin-left: 70px;
+    margin-top: 15px;
+  }
+
+  .container-header{
+    display: flex;
+    flex-direction: row;
+  }
+
+.material-symbols-outlined {
+  font-variation-settings:
+  ''
+}
