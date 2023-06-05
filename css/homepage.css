@@ -38,13 +38,13 @@ li a:hover {
   margin-left: 600px;  
 }
 
-li a[href="#about"] {
+li a[href="#Profil"] {
   background-color: #426B1F;
   color: white;
   border-radius: 8px;
 }
 
-li a[href="#about"]:hover {
+li a[href="#Profil"]:hover {
   background-color: #599A22;
   
 }
@@ -72,7 +72,7 @@ border-radius: 8px;}
 }
 
 .map_img{
-  margin-top: 75px;
+  margin-top: 60px;
 }
 
 figcaption{
