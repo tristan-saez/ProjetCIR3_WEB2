@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/add_acc.css">
+
+        <title>Ajouter un accident</title>
+    </head>
+    <body>
+        <ul>  
+            <li class="left-side"><img src="img/Design_sans_titre.png" height="79" width="79"></li>
+            <li class="left-side"><a href="#Rien">Accidentologie</a></li>
+            <span class="right-side">
+            <li ><a href="#Accueil">Accueil</a></li>
+            <li ><a href="#Carte">Carte</a></li>
+            <li ><a href="#Prédiction">Prédiction</a></li>
+            <li ><a href="#Form">Ajoutez un accident</a></li>
+            <li ><a href="#Profil">Log in/Sign In</a></li>
+             </span>
+          </ul>
+
+          <div class="center">
+            <p>Ajout d'accident</p>
+          </div>
+
+          <form action="#.php" id="Form_acc">
+            <div class="Form">
+            <div class="left">
+                <div class="sous-div">
+                    <label for="Age">Âge du conducteur:</label><br>
+                    <input type="text" id="Age" name="Age" placeholder="Tapez ici"><br>
+                </div>
+                <div class="sous-div">
+                    <label for="DateTime">Date et Heure:</label><br>
+                    <input type="text" id="DateTime" name="DateTime" placeholder="Tapez ici"><br>   
+                </div>
+                <div class="sous-div">
+                    <label for="datetime-local">Ville:</label><br>
+                    <input type="text" id="ville" name="ville" placeholder="Tapez ici"><br>
+                </div>
+                <div class="sous-div">
+                    <label for="latitude">Latitude:</label><br>
+                    <input type="text" id="Latitude" name="Latitude" placeholder="Tapez ici"><br>
+                </div>
+                <div class="sous-div">
+                    <label for="lname">Longitude:</label><br>
+                    <input type="text" id="Longitude" name="Longitude" placeholder="Tapez ici"><br>
+                </div>
+                
+            </div>
+            <div class="right">
+                <div class="sous-div">
+                    <label>L'État de la route</label><br>
+                    <select name="etat_route" id="route_select">
+                        <option value="">Selectionnez une option</option>
+                    </select><br>
+                </div>
+           
+
+            <div class="sous-div">
+                <label>Condition atmosphérique</label><br>
+            <select name="cond_atmo" id="atmo_select">
+                <option value="">Selectionnez une option</option>
+                
+            </select><br>
+            </div>
+            
+
+            <div class="sous-div">
+                <label>Utilisation de la ceinture de sécurité</label><br>
+                <select name="secu" id="secu_select">
+                    <option value="">Selectionnez une option</option>
+                    <option value="test">Test</option>
+                </select><br>
+            </div>
+           
+
+            <div class="sous-div">
+                <label>Luminosité</label><br>
+                <select name="cond_lumi" id="lumi_select">
+                    <option value="">Selectionnez une option</option>
+                </select><br>
+            </div>
+           
+            </div>
+            </div>
+            <div class="input-print"><input type="submit" class="submit" value="Ajouter un accident"> </div>
+          </form>
+          <footer>
+            <img src="img/2.png" height="100px" width="100px">
+            <p>Projet Web dynamique A3</p>
+            <p>Groupe 1 - Trinôme 1</p>
+            <p>2023</p>
+          </footer>
+    </body>
+</html>
