@@ -17,6 +17,51 @@
     return $db;
   }
 
+
+  function dbInsertAccident($db, $horodatage, $latitude, $longitude, $an_nais, $insee, $lum, $athmo, $route, $dispo_secu)
+  {
+    try
+    {
+      // $date1 = str_replace('T',' ',$date1);
+      // $date1 .= ":00";
+      // $duree .= ":00";
+
+      // $email = $_SESSION['email'];
+      $request2 = 'INSERT INTO accident ( horodatage, latitude, longitude, an_nais, insee, lum, athmo, "route", dispo_secu) VALUES ';
+      $request2 .= '( :horodatage, :latitude, :longitude, :an_nais, :insee, :lum, :athmo, :route, :dispo_secu)';
+
+      $statement = $db->prepare($request2);
+
+      $statement->bindParam(':horodatage', $horodatage, PDO::PARAM_STR, 20);
+      $statement->bindParam(':latitude', $latitude, PDO::PARAM_STR, 30);
+      $statement->bindParam(':longitude', $longitude, PDO::PARAM_STR, 30);
+      $statement->bindParam(':an_nais', $an_nais, PDO::PARAM_INT, 4);
+      $statement->bindParam(':insee', $insee, PDO::PARAM_INT, 5);
+      $statement->bindParam(':lum', $lum, PDO::PARAM_STR, 75);
+      $statement->bindParam(':athmo', $athmo, PDO::PARAM_STR,30);
+      $statement->bindParam(':route', $route, PDO::PARAM_STR, 20);
+      $statement->bindParam(':dispo_secu', $dispo_secu, PDO::PARAM_STR, 60);
+      
+      //var_dump($statement);
+
+      if ($statement->execute()) {
+        //echo "execute OK !";
+        return true;
+      }else {
+        //echo "execute NOK !";
+        return false;
+      }
+      // return true;
+    }
+
+    catch (PDOException $exception)
+    {
+      error_log('Request error: '.$exception->getMessage());
+      return false;
+    }
+
+  }
+
 /*
 function dbRequestProfils($db, $email, $mdp)
   {
@@ -532,5 +577,5 @@ function dbRequestProfils($db, $email, $mdp)
     }
   }
   
-
+*/
 ?>
