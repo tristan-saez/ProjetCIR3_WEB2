@@ -93,3 +93,14 @@ footer p {
 footer img{
   margin-top: 25px;
 }
+
+.text{
+  display: flex ;
+  flex-direction: column;
+  text-align: center;
+  
+}
+
+.text h3{
+  margin-right:1025px;
+}
