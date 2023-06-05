@@ -35,7 +35,7 @@ function createEvent(data) {
     }
     if (data) {
         alert("Event created successfully !");
-        window.location.replace("matchs.html");
+        window.location.replace("homepage.html");
     }else{
         alert("Error !");
     }
@@ -43,7 +43,7 @@ function createEvent(data) {
 
 function listeLum(tab_lum) {
     // console.log(tab_lum);
-    var selectLum = document.getElementById('lum');
+    var selectLum = document.getElementById('lumi_select');
     
     tab_lum.forEach(lum => {
         selectLum.innerHTML +=
@@ -52,7 +52,7 @@ function listeLum(tab_lum) {
 }
 
 function listeCity(tab_city) {
-    var selectCity = document.getElementById('city');
+    var selectCity = document.getElementById('ville');
     tab_city.forEach(city => {
         selectCity.innerHTML +=
             "<option value=" + city['code_insee'] + ">" + city['ville'] + "</option>" ;
@@ -61,7 +61,7 @@ function listeCity(tab_city) {
 
 function listeAthmo(tab_athmo) {
     // console.log(tab_athmo);
-    var selectAthmo = document.getElementById('sport');
+    var selectAthmo = document.getElementById('atmo_select');
     
     tab_athmo.forEach(athmo => {
         selectAthmo.innerHTML +=
@@ -70,7 +70,7 @@ function listeAthmo(tab_athmo) {
 }
 
 function listeRoute(tab_route) {
-    var selectRoute = document.getElementById('route');
+    var selectRoute = document.getElementById('route_select');
     tab_route.forEach(route => {
         selectRoute.innerHTML +=
             "<option value=" + route['route'] + ">" + route['route'] + "</option>" ;
@@ -78,7 +78,7 @@ function listeRoute(tab_route) {
 }
 
 function listeDispo_secu(tab_secu) {
-    var selectSecu = document.getElementById('dispo_secu');
+    var selectSecu = document.getElementById('secu_select');
     tab_secu.forEach(secu => {
         selectSecu.innerHTML +=
             "<option value=" + secu['dispo_secu'] + ">" + secu['dispo_secu'] + "</option>" ;

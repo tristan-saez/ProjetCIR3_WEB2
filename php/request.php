@@ -31,11 +31,10 @@
             isset($_POST['an_nais_conduct']) && isset($_POST['insee']) && isset($_POST['lum']) &&
             isset($_POST['athmo']) && isset($_POST['route']) && isset($_POST['dispo_secu'])){
                 
-                //var_dump($_POST['forme_physique']);
+                //var_dump($_POST['horodatage']);
                 $data = dbInsertEvent($db, $_POST['sport'], $_POST['maxPlayers'], $_POST['address'],
                 $_POST['city'], $_POST['date'], $_POST['time'], $_POST['price']);
                 // var_dump($data);
-                // $data = "insertplace";
             }
             else {
                 $data = "erreur addAccident request_PHP";
@@ -43,6 +42,37 @@
 
         }
     }
+
+    if ($requestMethod == 'POST') {
+        if ($requestRessource == 'listeCity') {
+            $data = dbRequestCity($db);           
+        }
+    }
+
+    if ($requestMethod == 'POST') {
+        if ($requestRessource == 'listeLum') {
+            $data = dbRequestLum($db);           
+        }
+    }
+
+    if ($requestMethod == 'POST') {
+        if ($requestRessource == 'listeAthmo') {
+            $data = dbRequestAthmo($db);  
+        }
+    }
+
+    if ($requestMethod == 'POST') {
+        if ($requestRessource == 'listeRoute') {
+            $data = dbRequestRoute($db);  
+        }
+    }
+
+    if ($requestMethod == 'POST') {
+        if ($requestRessource == 'listeDispo_secu') {
+            $data = dbRequestDispo_secu($db);  
+        }
+    }
+
     /*
     //login request
     if ($requestMethod == 'POST'){
@@ -103,23 +133,7 @@
         }
     }
 
-    if ($requestMethod == 'POST') {
-        if ($requestRessource == 'listSport') {
-            $data = dbRequestSport($db);           
-        }
-    }
-    if ($requestMethod == 'POST') {
-        if ($requestRessource == 'listCity') {
-            $data = dbRequestCity($db);           
-        }
-    }
-
-
-    if ($requestMethod == 'POST') {
-        if ($requestRessource == 'listMatch') {
-            $data = dbRequestAllMatch($db);  
-        }
-    }
+    
 
     if ($requestMethod == 'POST') {
         if ($requestRessource == 'filtre') {

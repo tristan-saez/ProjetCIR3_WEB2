@@ -62,7 +62,157 @@
 
   }
 
-/*
+  function dbRequestCity($db)
+  {
+    $request = 'SELECT ville,code_insee FROM ville';
+    $statement = $db->prepare($request);
+    $statement->execute();
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($result == '') {
+      return false;
+    } else {
+      return $result;
+    }
+  }
+
+  function dbRequestLum($db)
+  {
+    $request = 'SELECT lum FROM condition_lum';
+    $statement = $db->prepare($request);
+    $statement->execute();
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($result == '') {
+      return false;
+    } else {
+      return $result;
+    }
+  }
+
+  function dbRequestAthmo($db)
+  {
+    $request = 'SELECT athmo FROM condition_athmo';
+    $statement = $db->prepare($request);
+    $statement->execute();
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($result == '') {
+      return false;
+    } else {
+      return $result;
+    }
+  }
+
+  function dbRequestRoute($db)
+  {
+    $request = 'SELECT "route" FROM condition_route';
+    $statement = $db->prepare($request);
+    $statement->execute();
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($result == '') {
+      return false;
+    } else {
+      return $result;
+    }
+  }
+
+  function dbRequestDispo_secu($db)
+  {
+    $request = 'SELECT dispo_secu FROM condition_secu';
+    $statement = $db->prepare($request);
+    $statement->execute();
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($result == '') {
+      return false;
+    } else {
+      return $result;
+    }
+  }
+  
+  /*
+  function dbRequestAllMatch($db)
+  {
+    $request = 'SELECT * FROM all_match LIMIT 8';
+    $statement = $db->prepare($request);
+    $statement->execute();
+    // var_dump($statement);
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+    if ($result == '') {
+      return false;
+    } else {
+      return $result;
+    }
+  }
+
+  function dbRequestMatch($db, $sport, $ville, $periode)
+  {
+
+    $request = 'SELECT * FROM all_match';
+
+    $montest = false;
+
+    if ($sport != '0') {
+      if ($montest == false) {
+        $request .= ' WHERE ';
+        $montest = true;
+      }else {
+        $request .= ' AND ';
+      }
+      $request .= 'nom_sport=:sport';
+      
+    }
+
+    if ($ville != '0') {
+      if ($montest == false) {
+        $request .= ' WHERE ';
+        $montest = true;
+      }else {
+        $request .= ' AND ';
+      }
+      $request .= 'code_insee=:code_insee';
+      // $statement->bindParam(':code_insee', $ville, PDO::PARAM_STR, 20);
+    }
+
+    if ($periode != '0') {
+      if ($montest == false) {
+        $request .= ' WHERE ';
+        $montest = true;
+      }else {
+        $request .= ' AND ';
+      }
+      $request .= ':periode<DATEDIFF(NOW(),date_match) AND DATEDIFF(NOW(),date_match)<0';
+      // $statement->bindParam(':periode', $periode, PDO::PARAM_STR, 20);
+    }
+
+
+    $request .= ' LIMIT 8';
+
+    $statement = $db->prepare($request);
+
+    if ($periode != '0') {
+      $statement->bindParam(':periode', $periode, PDO::PARAM_STR, 20);
+    }
+    if ($ville != '0') {
+      $statement->bindParam(':code_insee', $ville, PDO::PARAM_STR, 20);
+    }
+    if ($sport != '0') {
+      $statement->bindParam(':sport', $sport, PDO::PARAM_STR, 20);
+    }
+
+    $statement->execute();
+    
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+    if ($result == '') {
+      return false;
+    } else {
+      return $result;
+    }
+  }
+
+
 function dbRequestProfils($db, $email, $mdp)
   {
     try
@@ -207,115 +357,7 @@ function dbRequestProfils($db, $email, $mdp)
 
   }
 
-  function dbRequestSport($db)
-  {
-    $request = 'SELECT nom_sport FROM sport';
-    $statement = $db->prepare($request);
-    $statement->execute();
-    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-    if ($result == '') {
-      return false;
-    } else {
-      return $result;
-    }
-    
-    
-  }
-
-  function dbRequestCity($db)
-  {
-    $request = 'SELECT nom_ville,code_insee FROM ville';
-    $statement = $db->prepare($request);
-    $statement->execute();
-    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-    if ($result == '') {
-      return false;
-    } else {
-      return $result;
-    }
-    
-  }
-
-  function dbRequestAllMatch($db)
-  {
-    $request = 'SELECT * FROM all_match LIMIT 8';
-    $statement = $db->prepare($request);
-    $statement->execute();
-    // var_dump($statement);
-    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-    if ($result == '') {
-      return false;
-    } else {
-      return $result;
-    }
-  }
-
-  function dbRequestMatch($db, $sport, $ville, $periode)
-  {
-
-    $request = 'SELECT * FROM all_match';
-
-    $montest = false;
-
-    if ($sport != '0') {
-      if ($montest == false) {
-        $request .= ' WHERE ';
-        $montest = true;
-      }else {
-        $request .= ' AND ';
-      }
-      $request .= 'nom_sport=:sport';
-      
-    }
-
-    if ($ville != '0') {
-      if ($montest == false) {
-        $request .= ' WHERE ';
-        $montest = true;
-      }else {
-        $request .= ' AND ';
-      }
-      $request .= 'code_insee=:code_insee';
-      // $statement->bindParam(':code_insee', $ville, PDO::PARAM_STR, 20);
-    }
-
-    if ($periode != '0') {
-      if ($montest == false) {
-        $request .= ' WHERE ';
-        $montest = true;
-      }else {
-        $request .= ' AND ';
-      }
-      $request .= ':periode<DATEDIFF(NOW(),date_match) AND DATEDIFF(NOW(),date_match)<0';
-      // $statement->bindParam(':periode', $periode, PDO::PARAM_STR, 20);
-    }
-
-
-    $request .= ' LIMIT 8';
-
-    $statement = $db->prepare($request);
-
-    if ($periode != '0') {
-      $statement->bindParam(':periode', $periode, PDO::PARAM_STR, 20);
-    }
-    if ($ville != '0') {
-      $statement->bindParam(':code_insee', $ville, PDO::PARAM_STR, 20);
-    }
-    if ($sport != '0') {
-      $statement->bindParam(':sport', $sport, PDO::PARAM_STR, 20);
-    }
-
-    $statement->execute();
-    
-    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-    if ($result == '') {
-      return false;
-    } else {
-      return $result;
-    }
-  }
+  
 
   function dbRequestMesMatch1($db)
   {
