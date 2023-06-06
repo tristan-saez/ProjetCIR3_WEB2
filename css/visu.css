@@ -197,8 +197,8 @@ input:nth-child(2), select{
 }
 .plotly{
   background-color: #C2C2C2;
-  margin-left: 70px;
-  margin-top: 15px;
+  margin: auto;
+  margin-top: 30px;
   height: 407px;
   width: 1223px;
 }
@@ -243,3 +243,5 @@ footer img{
 footer :nth-child(4){
   padding-bottom: 20px;
 }
+
+
