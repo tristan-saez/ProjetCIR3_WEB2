@@ -49,7 +49,7 @@ body{
     
   }
   
-  li a[href="#Rien"]{
+  .left-side a[href="homepage.html"]{
     font-size: 24px;
     color: #426B1F;
   }
@@ -119,9 +119,8 @@ footer{
     padding: 0;
     margin: 0;
   }
-  
-
 
   footer img{
     margin-top: 25px;
   }
+
