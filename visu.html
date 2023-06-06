@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/visu.css">
+        <script src="js/visu.js"></script>
+        <title>Ajouter un accident</title>
+    </head>
+    <body>
+        <ul>  
+            <li class="left-side"><img src="img/Design_sans_titre.png" height="79" width="79"></li>
+            <li class="left-side"><a href="homepage.html">Accidentologie</a></li>
+            <span class="right-side">
+            <li ><a href="homepage.html">Accueil</a></li>
+            <li ><a href="visu.html">Carte</a></li>
+            <li ><a href="#Prédiction">Prédiction</a></li>
+            <li ><a href="add_acc.html">Ajoutez un accident</a></li>
+            <li ><a href="#Profil">Log in/Sign In</a></li>
+             </span>
+          </ul>
+
+          <div class="center">
+            <p>La carte</p>
+          </div>
+
+          <div class="header-filter">
+            <h3>Affichages</h3><p>9 Juin, 2023</p>
+          </div>
+          
+          <div class="filter">
+            <div class="container-header">
+            <img class="material-symbols-outlined" src="img/filter_alt_FILL0_wght400_GRAD0_opsz48.png">
+            <button id="filter-toggle">Filter</button>
+             <input id="search" name="search" placeholder="search ...">
+             <button><img src="img/search_FILL0_wght400_GRAD0_opsz48.png" width="23" height="23"></button></input>
+             <div class="buttons">
+                <button id="apply-filter" class="apply-filter">Appliquer</button>
+                <button id="clean-filter-btn" class="clean-filter-btn">Clean</button>
+             </div>
+            </div>
+            <div id="filter-menu" class="filter-menu">
+              <div class="filter-row">
+                <div class="filter-column">
+                  <label for="type">Gravité de l'accident:</label>
+                  <select id="type">
+                    <option value="all">All</option>
+                    <option value="Grave">Grave</option>
+                    <option value="Léger">Léger</option>
+                  </select>
+                </div>
+          
+                <div class="filter-column">
+                  <label for="color">Ville:</label>
+                  <input id="color" placeholder="Brest">
+                </div>
+          
+                <div class="filter-column">
+                  <label for="size">Âge:</label>
+                  <select id="size">
+                    <option value="all">All</option>
+                    <option value="18-20">18-20</option>
+                    <option value="20-30">20-30</option>
+                    <option value="30-40">30-40</option>
+                    <option value="40-50">40-50</option>
+                    <option value="60-70">60-70</option>
+                    <option value="70-80">70-80</option>
+                    <option value="80-90">80-90</option>
+
+                  </select>
+
+                  <label class="lumi" for="lumi">Luminosité</label>
+                  <select id="lumi">
+                    <option value="All">All</option>
+                    <option value="Test">Test</option>
+                  </select>
+                </div>
+              </div>          
+              <div id="selected-filters" class="selected-filters"></div>
+            </div>
+          </div>
+
+          <div class="plotly"></div>
+          <div class="links">
+            <a href="clustering.html">Prédire un cluster</a>
+            <a href="prediction.html">Prédire la gravité d'accident</a>
+            <a href="add_acc.html">Ajouter un accident</a>
+          </div>
+
+          <footer>
+            <img src="img/2.png" height="100px" width="100px">
+            <p>Projet Web dynamique A3</p>
+            <p>Groupe 1 - Trinôme 1</p>
+            <p>2023</p>
+          </footer>
+
+     <script>
+      var filterToggle = document.getElementById("filter-toggle");
+var filterMenu = document.getElementById("filter-menu");
+var applyFilterBtn = document.getElementById("apply-filter");
+var selectedFiltersElem = document.getElementById("selected-filters");
+var cleanFilterBtn = document.getElementById("clean-filter-btn")
+filterToggle.addEventListener("click", function() {
+  if (filterMenu.style.display === "block") {
+    filterMenu.style.display = "none";
+  } else {
+    filterMenu.style.display = "block";
+  }
+});
+
+    applyFilterBtn.addEventListener("click", function() {
+  var typeFilter = document.getElementById("type").value;
+  var colorFilter = document.getElementById("color").value;
+  var sizeFilter = document.getElementById("size").value;
+  var lumiFilter = document.getElementById("lumi").value;
+  var selectedFilters = [];
+  var existingFilters = [];
+
+  // Récupérer les filtres existants dans la liste
+  var existingFiltersElements = selectedFiltersElem.getElementsByClassName("selected-filter");
+  for (var i = 0; i < existingFiltersElements.length; i++) {
+    var existingFilterText = existingFiltersElements[i].textContent.trim();
+    existingFilters.push(existingFilterText);
+  }
+
+  // Ajouter les nouveaux filtres s'ils ne sont pas déjà présents
+  if (typeFilter !== "all" && !existingFilters.includes(typeFilter)) {
+    selectedFilters.push(typeFilter);
+  }
+
+  if (colorFilter !== "all" && !existingFilters.includes(colorFilter)) {
+    selectedFilters.push(colorFilter);
+  }
+
+  if (sizeFilter !== "all" && !existingFilters.includes(sizeFilter)) {
+    selectedFilters.push(sizeFilter);
+  }
+
+  if (lumiFilter !== "all" && !existingFilters.includes(lumiFilter)) {
+    selectedFilters.push(lumiFilter);
+  }
+
+  // Mettre à jour la liste des filtres sélectionnés dans le HTML
+  var selectedFiltersHTML = "";
+  for (var j = 0; j < selectedFilters.length; j++) {
+    selectedFiltersHTML += '<div class="selected-filter">' + selectedFilters[j] + '<span class="remove-filter" onclick="removeFilter(this)">x</span></div>';
+  }
+
+  selectedFiltersElem.innerHTML = selectedFiltersHTML;
+  //Ajoutez en bas une requete ajax l'interaction avec la base de données ou avec plotly
+});
+
+
+function removeFilter(elem) {
+      var selectedFilter = elem.parentNode;
+      selectedFilter.parentNode.removeChild(selectedFilter);
+    }
+
+    cleanFilterBtn.addEventListener("click", function() {
+  selectedFiltersElem.innerHTML = "";
+  document.getElementById("type").value = "all";
+  document.getElementById("color").value = "all";
+  document.getElementById("size").value = "all";
+});
+
+     </script>
+    </body>
+</html>

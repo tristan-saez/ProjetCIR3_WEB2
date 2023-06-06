@@ -2,6 +2,7 @@ body{
     font-family: "Inter", sans-serif; 
     padding: 0;
     margin: 0;
+    
   
   }
   
@@ -35,9 +36,9 @@ body{
   }
   
   .right-side {
-    margin-left: 600px;  
+    margin-left: 650px;  
   }
-  
+
   li a[href="#Profil"] {
     background-color: #426B1F;
     color: white;
@@ -54,64 +55,27 @@ body{
     color: #426B1F;
   }
 
+
   .center {
     text-align: center;
     margin-top: 75px;
     font-size: 48px;
+    font-family: "Newsreader", sans-serif;
   }
 
-  .Form{
+  .plotly{
+    height: 1440px;
+    width: 988px;
+    background-color: #c2c2c2;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-  }
-
-  .right{
-    margin-left: 50px;
-  }
-
-  .right, .left{
-    border: 1.5px dashed;
-    border-color: #426B1F;
-    padding: 30px;
-  }
-
-input, select {
-    padding: 15px;
-    margin-top: 5px;
-    width: 300px;
-    border-color: #426B1F;
-    outline: none;
-    background-color: white;
-
-}
-
-.submit{
-    color: white;
-    background-color:#426B1F;
-    margin-top : 15px;
-    border-radius: 8px;
-}
-
-.input-print{
-    text-align: center;
-}
-
-.sous-div{
-    margin-top: 15px;
-}
-
-input:focus{
-    background-color: #729F4B;
-}
-
-select.decorated option:hover {
-    background-color: #729F4B;
+    margin: auto;
 }
 
 footer{
     background-color: #1E1E1E;
     text-align: center;
+    margin-top: 40px;
   }
   
   footer p {
@@ -119,8 +83,12 @@ footer{
     padding: 0;
     margin: 0;
   }
-
+  
   footer img{
     margin-top: 25px;
   }
-
+  
+  footer :nth-child(4){
+    padding-bottom: 20px;
+  }
+  

@@ -49,7 +49,7 @@ li a[href="#Profil"]:hover {
   
 }
 
-li a[href="#Rien"]{
+.left-side a[href="homepage.html"]{
   font-size: 24px;
   color: #426B1F;
 }
@@ -60,8 +60,9 @@ li a[href="#Rien"]{
   font-size: 48px;
 }
 
-a[href="#visualisation"]{ text-decoration: none;
-  color: white;
+.map a[href="visu.html"]{ 
+text-decoration: none;
+color: white;
 background-color: #426B1F;
 font-size: 20px;
 padding: 12px 8px;
