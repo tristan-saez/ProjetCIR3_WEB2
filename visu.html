@@ -70,6 +70,7 @@
                     <option value="80-90">80-90</option>
 
                   </select>
+<<<<<<< HEAD
                   </div>
                   <div class="filter-column">
                   <label class="lumi" for="lumi">Luminosité</label>
@@ -78,18 +79,33 @@
                   </select>
                   </div>
                 </div>     
+=======
+
+                  <label class="lumi" for="lumi">Luminosité</label>
+                  <select id="lumi">
+                    <option value="All">All</option>
+                    <option value="Test">Test</option>
+                  </select>
+                </div>
+              </div>          
+>>>>>>> 497c53f1618857c0d714b925937491aa75eee35d
               <div id="selected-filters" class="selected-filters"></div>
             </div>
           </div>
 
+<<<<<<< HEAD
           <div id="map" class="plotly"></div>
           <div id="map2" class="plotly"></div>
+=======
+          <div class="plotly"></div>
+>>>>>>> 497c53f1618857c0d714b925937491aa75eee35d
           <div class="links">
             <a href="clustering.html">Prédire un cluster</a>
             <a href="prediction.html">Prédire la gravité d'accident</a>
             <a href="add_acc.html">Ajouter un accident</a>
           </div>
 
+<<<<<<< HEAD
           <table id="SIUUU" class="tableau">
             <tr>
               <th>Horodatage</th>
@@ -104,6 +120,8 @@
             </tr>
           </table>
         
+=======
+>>>>>>> 497c53f1618857c0d714b925937491aa75eee35d
           <footer>
             <img src="img/2.png" height="100px" width="100px">
             <p>Projet Web dynamique A3</p>
@@ -116,7 +134,11 @@
 var filterMenu = document.getElementById("filter-menu");
 var applyFilterBtn = document.getElementById("apply-filter");
 var selectedFiltersElem = document.getElementById("selected-filters");
+<<<<<<< HEAD
 var cleanFilterBtn = document.getElementById("clean-filter-btn");
+=======
+var cleanFilterBtn = document.getElementById("clean-filter-btn")
+>>>>>>> 497c53f1618857c0d714b925937491aa75eee35d
 filterToggle.addEventListener("click", function() {
   if (filterMenu.style.display === "block") {
     filterMenu.style.display = "none";
@@ -126,7 +148,11 @@ filterToggle.addEventListener("click", function() {
 });
 
     applyFilterBtn.addEventListener("click", function() {
+<<<<<<< HEAD
   var typeFilter = document.getElementById("athmo").value;
+=======
+  var typeFilter = document.getElementById("type").value;
+>>>>>>> 497c53f1618857c0d714b925937491aa75eee35d
   var colorFilter = document.getElementById("color").value;
   var sizeFilter = document.getElementById("size").value;
   var lumiFilter = document.getElementById("lumi").value;
@@ -145,7 +171,11 @@ filterToggle.addEventListener("click", function() {
     selectedFilters.push(typeFilter);
   }
 
+<<<<<<< HEAD
   if (colorFilter !== "all" && colorFilter !=="" && !existingFilters.includes(colorFilter)) {
+=======
+  if (colorFilter !== "all" && !existingFilters.includes(colorFilter)) {
+>>>>>>> 497c53f1618857c0d714b925937491aa75eee35d
     selectedFilters.push(colorFilter);
   }
 
@@ -175,12 +205,19 @@ function removeFilter(elem) {
 
     cleanFilterBtn.addEventListener("click", function() {
   selectedFiltersElem.innerHTML = "";
+<<<<<<< HEAD
   document.getElementById("athmo").value = "all";
+=======
+  document.getElementById("type").value = "all";
+>>>>>>> 497c53f1618857c0d714b925937491aa75eee35d
   document.getElementById("color").value = "all";
   document.getElementById("size").value = "all";
 });
 
+<<<<<<< HEAD
 console.log(selectedFilters);
+=======
+>>>>>>> 497c53f1618857c0d714b925937491aa75eee35d
      </script>
     </body>
 </html>
