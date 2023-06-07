@@ -1,0 +1,308 @@
+body{
+    font-family: "Newsreader", sans-serif; 
+    padding: 0;
+    margin: 0;
+  
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: #333;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover {
+    background-color: #ddd;
+  }
+  
+  .left-side {
+    float: left;
+  }
+  
+  .right-side {
+    margin-left: 600px;  
+  }
+
+  li a[href="#Profil"] {
+    background-color: #426B1F;
+    color: white;
+    border-radius: 8px;
+  }
+  
+  li a[href="#Profil"]:hover {
+    background-color: #599A22;
+    
+  }
+  
+  .left-side a[href="index.html"]{
+    font-size: 24px;
+    color: #426B1F;
+  }
+
+  .center {
+    text-align: center;
+    margin-top: 75px;
+    font-size: 48px;
+    font-family: "Newsreader", sans-serif;
+  }
+
+  .header-filter{
+    display: flex;
+    flex-direction: row;
+    margin-left: 70px;
+    border-bottom: #E6E6E6 solid 2px;
+  }
+
+  h3{
+    font-size: 34px;
+  }
+
+  .header-filter p{
+    margin-left: 12px;
+    margin-top: 50px;
+  }
+
+  .filter{
+    margin-left: 70px;
+    margin-top: 15px;
+  }
+
+  .container-header{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .filter div #search{
+    margin-left: 350px;
+    width: 300px;
+    border-radius: 8px;
+  }
+
+  .filter div input button{
+    background-color: white;
+    
+  }
+  
+  .buttons{
+    display: flex;
+    flex-direction: row;
+    margin-left: 100px;
+  }
+
+  button:nth-child(1){
+    width: 100px;
+  }
+  button:nth-child(2){
+    margin-left: 30px;
+    width: 100px;
+  }
+
+  button{
+    border-radius: 8px  ;
+   
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+   
+  }
+
+   button:hover{
+    background-color: #599A22;
+    
+  }
+
+  .filter-menu {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    display: none;
+  }
+
+  .filter-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .filter-column {
+    flex: 1;
+    padding: 0 10px;
+    border-right: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  .filter-column:last-child {
+    border-right: none;
+  }
+
+  .selected-filters {
+    margin-top: 10px;
+  }
+
+  .selected-filter {
+    display: inline-block;
+    padding: 5px;
+    background-color: #71B637;
+    margin-right: 5px;
+    color: white;
+    border-radius: 20px;
+    padding: 10px;
+  }
+
+  .selected-filter .remove-filter {
+    color: #ccc;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 5px;
+  }
+
+  .apply-filter{
+    background-color: #426B1F;
+    color: white;
+    border-radius: 10px;
+  }
+  
+  .clean-filter-btn{
+    border: 1px solid #C2C2C2;
+  }
+  
+input:nth-child(2), select{
+  margin-left: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  padding: 5px;
+  
+}
+
+.filter-column .lumi{
+  margin-left: 10px;
+}
+
+/* .plotly{
+  background-color: #C2C2C2;
+  margin: auto;
+  margin-top: 30px;
+  height: 407px;
+  width: 1223px;
+} */
+
+#map, #map2{
+  height: 700px;
+}
+
+
+
+.links a{
+  text-decoration: none;
+  padding:12px 8px 12px 8px;
+  background-color: #FF6300;
+  border-radius: 5px;
+  color: white;
+}
+
+.links{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-right: 100px;
+  margin-top: 20px;
+}
+
+.links a:nth-child(3){
+  background-color: #426B1F;
+}
+
+/* Style du tableau */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Style pour les boutons */
+.button {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+footer{
+  background-color: #1E1E1E;
+  text-align: center;
+  margin-top: 40px;
+}
+
+footer p {
+  color: white ;
+  padding: 0;
+  margin: 0;
+}
+
+footer img{
+  margin-top: 25px;
+}
+
+footer :nth-child(4){
+  padding-bottom: 20px;
+}
+
+.tableau{
+  font-size: 12px;
+  margin-left: 135px; 
+  margin-top: 20px;
+  max-width: 1223px;
+}
+
+.button-table{
+  margin-top: 20px;
+  margin-left: 135px;
+}
+
+.ancien_acc{
+  background-color: #f2f2f2;
+}
+
+.change-filter{
+  background-color: #426B1F;
+    color: white;
+    border-radius: 10px;
+    margin-left:25px;
+    padding:8px;
+}

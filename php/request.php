@@ -27,51 +27,85 @@
     if ($requestMethod == "POST") {
         if ($requestRessource == "addAccident") {
 
-            if (isset($_POST['horodatage']) && isset($_POST['latitude']) && isset($_POST['longitude']) &&
+            if (isset($_POST['horodatage']) &&
             isset($_POST['an_nais_conduct']) && isset($_POST['insee']) && isset($_POST['lum']) &&
-            isset($_POST['athmo']) && isset($_POST['route']) && isset($_POST['dispo_secu'])){
+            isset($_POST['athmo']) && isset($_POST['etat_route']) && isset($_POST['dispo_secu'])){
                 
                 //var_dump($_POST['horodatage']);
-                $data = dbInsertEvent($db, $_POST['sport'], $_POST['maxPlayers'], $_POST['address'],
-                $_POST['city'], $_POST['date'], $_POST['time'], $_POST['price']);
+                $data = dbInsertAccident($db, $_POST['horodatage'], 
+                $_POST['an_nais_conduct'], $_POST['insee'], $_POST['lum'], $_POST['athmo'], $_POST['etat_route'],
+                $_POST['dispo_secu']);
                 // var_dump($data);
+                
             }
             else {
-                $data = "erreur addAccident request_PHP";
+                $data = "request";
             }
 
         }
     }
 
     if ($requestMethod == 'POST') {
-        if ($requestRessource == 'listeCity') {
+        if ($requestRessource == 'listCity') {
             $data = dbRequestCity($db);           
         }
     }
 
     if ($requestMethod == 'POST') {
-        if ($requestRessource == 'listeLum') {
+        if ($requestRessource == 'listLum') {
             $data = dbRequestLum($db);           
         }
     }
 
     if ($requestMethod == 'POST') {
-        if ($requestRessource == 'listeAthmo') {
+        if ($requestRessource == 'listAthmo') {
             $data = dbRequestAthmo($db);  
         }
     }
 
     if ($requestMethod == 'POST') {
-        if ($requestRessource == 'listeRoute') {
+        if ($requestRessource == 'listRoute') {
             $data = dbRequestRoute($db);  
         }
     }
 
     if ($requestMethod == 'POST') {
-        if ($requestRessource == 'listeDispo_secu') {
+        if ($requestRessource == 'listDispo_secu') {
             $data = dbRequestDispo_secu($db);  
         }
     }
+
+    if ($requestMethod == 'POST') {
+        if ($requestRessource == 'filtre') {
+            // $var = "test filtre";
+            // var_dump($var);
+            // echo "test filtre";
+            //var_dump($_POST['sport']);
+            setcookie('maxAcc', $_POST['cookies_max'], time() + 60 * 60);
+            $data = dbRequestAcc($db ,$_POST['athmo'], $_POST['an_nais'], $_POST['lum']);
+            // $data = "testfiltre";
+        }
+    }
+
+    if($requestMethod=='POST'){
+        if($requestRessource =='ancien_acc'){
+            $data = dbRequestAncienAcc($db);
+        }
+    }
+
+    if($requestMethod =='POST'){
+        if($requestRessource== 'accident'){
+            $data = dbRequestAccident($db);
+        }
+    }
+
+    if($requestMethod=='POST'){
+        if($requestRessource =='ancien_acc_bis'){
+            $data = dbRequestAncienAcc($db);
+        }
+    }
+
+  
 
     /*
     //login request
@@ -316,7 +350,7 @@ if ($requestMethod == 'POST') {
 }
 
 
-
+    */
 
 
     // Send data to the client.
@@ -327,5 +361,5 @@ if ($requestMethod == 'POST') {
     echo json_encode($data);
     
     exit;
-    */
+
 ?>

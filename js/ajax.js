@@ -24,7 +24,7 @@ function ajaxRequest(type, url, callback, data = null)
       case 201:
         // alert(data);
         // console.log('1');
-        //console.log(xhr.responseText);
+        // console.log(xhr.responseText);
         // console.log('2');
         callback(JSON.parse(xhr.responseText));
         break;

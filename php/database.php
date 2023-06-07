@@ -18,53 +18,58 @@
   }
 
 
-  function dbInsertAccident($db, $horodatage, $latitude, $longitude, $an_nais, $insee, $lum, $athmo, $route, $dispo_secu)
+  function dbInsertAccident($db, $horodatage, $an_nais, $insee, $lum, $athmo, $route, $dispo_secu)
   {
-    try
-    {
-      // $date1 = str_replace('T',' ',$date1);
-      // $date1 .= ":00";
-      // $duree .= ":00";
+    try {
+        $horodatage = date_create(str_replace("T", " ", $horodatage));
+        $horodatage = date_format($horodatage, 'Y-m-d H:i:s');
 
-      // $email = $_SESSION['email'];
-      $request2 = 'INSERT INTO accident ( horodatage, latitude, longitude, an_nais, insee, lum, athmo, "route", dispo_secu) VALUES ';
-      $request2 .= '( :horodatage, :latitude, :longitude, :an_nais, :insee, :lum, :athmo, :route, :dispo_secu)';
 
-      $statement = $db->prepare($request2);
+        $an_nais = date("Y", strtotime($an_nais.' years ago'));
+        error_log('DEBUG: ' . $an_nais);
+        error_log('DEBUG: ' . $horodatage);
+        error_log('DEBUG: ' . $an_nais);
+        error_log('DEBUG: ' . $insee);
+        error_log('DEBUG: ' . $athmo);
 
-      $statement->bindParam(':horodatage', $horodatage, PDO::PARAM_STR, 20);
-      $statement->bindParam(':latitude', $latitude, PDO::PARAM_STR, 30);
-      $statement->bindParam(':longitude', $longitude, PDO::PARAM_STR, 30);
-      $statement->bindParam(':an_nais', $an_nais, PDO::PARAM_INT, 4);
-      $statement->bindParam(':insee', $insee, PDO::PARAM_INT, 5);
-      $statement->bindParam(':lum', $lum, PDO::PARAM_STR, 75);
-      $statement->bindParam(':athmo', $athmo, PDO::PARAM_STR,30);
-      $statement->bindParam(':route', $route, PDO::PARAM_STR, 20);
-      $statement->bindParam(':dispo_secu', $dispo_secu, PDO::PARAM_STR, 60);
-      
-      //var_dump($statement);
+        // Fetch the INSEE code based on the city name
+        // $request1 = 'SELECT insee FROM ville WHERE ville = :ville';
+        // $statement = $db->prepare($request1);
+        // $statement->bindParam(':ville', $ville, PDO::PARAM_STR, 30);
+        // $statement->execute();
+        // $code_insee = $statement->fetch(PDO::FETCH_COLUMN);
 
-      if ($statement->execute()) {
-        //echo "execute OK !";
-        return true;
-      }else {
-        //echo "execute NOK !";
-        return false;
-      }
-      // return true;
+
+
+        $request2 = 'INSERT INTO accident (horodatage, an_naiss_conduct, insee, lum, athmo, etat_route, dispo_secu) VALUES ';
+        $request2 .= '(:horodatage, :an_nais, :insee, :lum, :athmo, :route, :dispo_secu)';
+
+        $statement = $db->prepare($request2);
+
+        $statement->bindParam(':horodatage', $horodatage, PDO::PARAM_STR, 20);
+        $statement->bindParam(':an_nais', $an_nais, PDO::PARAM_STR, 4);
+        $statement->bindParam(':insee', $insee, PDO::PARAM_STR, 20);
+        $statement->bindParam(':lum', $lum, PDO::PARAM_STR, 200);
+        $statement->bindParam(':athmo', $athmo, PDO::PARAM_STR, 200);
+        $statement->bindParam(':route', $route, PDO::PARAM_STR, 200);
+        $statement->bindParam(':dispo_secu', $dispo_secu, PDO::PARAM_STR, 200);
+
+        try {
+            $statement->execute();
+            return "successful";
+        } catch(PDOException $exception) {
+            error_log('Request error: ' . $exception->getMessage());
+            return "request";
+        }
+    } catch (PDOException $exception) {
+        error_log('Request error: ' . $exception->getMessage());
+        return "connection";
     }
-
-    catch (PDOException $exception)
-    {
-      error_log('Request error: '.$exception->getMessage());
-      return false;
-    }
-
   }
 
   function dbRequestCity($db)
   {
-    $request = 'SELECT ville,code_insee FROM ville';
+    $request = 'SELECT ville,insee FROM ville';
     $statement = $db->prepare($request);
     $statement->execute();
     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -106,7 +111,7 @@
 
   function dbRequestRoute($db)
   {
-    $request = 'SELECT "route" FROM condition_route';
+    $request = 'SELECT etat_route FROM condition_route';
     $statement = $db->prepare($request);
     $statement->execute();
     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -132,7 +137,90 @@
     }
   }
   
+  function dbRequestAncienAcc($db)
+  {
+    $request = "SELECT DATE_FORMAT(ac.date, \"%d/%m/%Y %H:%i\") 'date', ac.ville, ac.id_code_insee, ac.latitude, ac.longitude, ac.descr_athmo, ac.descr_lum, ac.descr_etat_surf, ac.an_nais, ac.descr_dispo_secu  FROM ancien_acc ac LIMIT 100;";
+    $statement = $db->prepare($request);
+    $statement->execute();
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    return $result;
+  }
+
+  function dbRequestAccident($db){
+    $request = "SELECT *, DATE_FORMAT(ac.horodatage, \"%d/%m/%Y %H:%i\") 'horodatage' from accident ac join  ville on ac.insee = ville.insee;";
+    $statement = $db->prepare($request);
+    $statement->execute();
+    $result=$statement->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+  
+
+
+
+  
   /*
+  function dbRequestAcc($db, $atmo, $age, $lumi)
+  {
+
+    $request = 'SELECT * FROM accident';
+
+    $montest = false;
+
+    if ($atmo != '0') {
+      if ($montest == false) {
+        $request .= ' WHERE ';
+        $montest = true;
+      }else {
+        $request .= ' AND ';
+      }
+      $request .= 'athmo=:atmo';
+      
+    }
+
+    if ($age != '0') {
+      if ($montest == false) {
+        $request .= ' WHERE ';
+        $montest = true;
+      }else {
+        $request .= ' AND ';
+      }
+      $request .= 'an_naiss_conduct=:age';
+    }
+
+    if ($lumi != '0') {
+      if ($montest == false) {
+        $request .= ' WHERE ';
+        $montest = true;
+      }else {
+        $request .= ' AND ';
+      }
+      $request .= 'lum=:lumi';
+      // $request .= ':periode<DATEDIFF(NOW(),date_match) AND DATEDIFF(NOW(),date_match)<0';
+    }
+
+
+    $request .= ' LIMIT 8';
+
+    $statement = $db->prepare($request);
+
+    if ($atmo != '0' && $age != '0' && $lumi != '0') {
+      $statement->bindParam(':atmo', $atmo, PDO::PARAM_STR, 50);
+      $statement->bindParam(':age', $age, PDO::PARAM_INT, 20);
+      $statement->bindParam(':lumi', $lumi, PDO::PARAM_STR, 50);
+    }
+
+    $statement->execute();
+    
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+    if ($result == '') {
+      return false;
+    } else {
+      return $result;
+    }
+  }
+
+  
   function dbRequestAllMatch($db)
   {
     $request = 'SELECT * FROM all_match LIMIT 8';

@@ -1,11 +1,16 @@
+@font-face {
+  font-family: "Newsreader";
+    src: url("Newsreader-VariableFont_opsz,wght.ttf");
+}
+
 body{
-    font-family: "Inter", sans-serif; 
+    font-family: "Newsreader", sans-serif; 
     padding: 0;
     margin: 0;
   
   }
   
-  ul {
+  #navbar:first-child {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -14,11 +19,11 @@ body{
     align-items: center;
   }
   
-  li {
+  #navbar li {
     float: left;
   }
-  
-  li a {
+
+  #navbar  li a {
     display: block;
     color: #333;
     text-align: center;
@@ -26,10 +31,19 @@ body{
     text-decoration: none;
   }
   
-  li a:hover {
+  #navbar li a:hover {
     background-color: #ddd;
   }
   
+  #navbar #prof{
+    background-color: #426B1F;
+    border-radius: 8px;
+    color:white;
+  }
+  #navbar #prof:hover{
+    background-color: #729F4B;
+  }
+
   .left-side {
     float: left;
   }
@@ -38,20 +52,9 @@ body{
     margin-left: 600px;  
   }
   
-  li a[href="#Profil"] {
-    background-color: #426B1F;
-    color: white;
-    border-radius: 8px;
-  }
-  
-  li a[href="#Profil"]:hover {
-    background-color: #599A22;
-    
-  }
-  
-  li a[href="#Rien"]{
+  #accident{
     font-size: 24px;
-    color: #426B1F;
+    color:#426B1F;
   }
 
   .center {
@@ -89,7 +92,7 @@ input, select {
 .submit{
     color: white;
     background-color:#426B1F;
-    margin-top : 15px;
+    margin-top : 30px;
     border-radius: 8px;
 }
 
@@ -103,6 +106,7 @@ input, select {
 
 input:focus{
     background-color: #729F4B;
+    color: white ;
 }
 
 select.decorated option:hover {
@@ -110,6 +114,7 @@ select.decorated option:hover {
 }
 
 footer{
+    margin-top: 30px;
     background-color: #1E1E1E;
     text-align: center;
   }

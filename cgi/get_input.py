@@ -8,6 +8,8 @@ import cgitb
 import json
 import os
 
+import get_data as gd
+
 # activation debeug CGI
 cgitb.enable()
 
@@ -17,8 +19,8 @@ form = cgi.FieldStorage()
 # verification de présence d'une clé dans le tableau form
 if 'mode' not in form:
     print('request attribute required !')
+    form = 'ERREUR'
     exit()
-    request = 'ERREUR'
 else:
     # lecture de la valeur de l'attribut dans une variable
     mode = form["mode"].value
@@ -28,7 +30,8 @@ else:
             lon = form["longitude"].value
             centroids = form["centroids"].value
 
-            os.system(f"./scripts.sh -m {mode} {lat} {lon} ({centroids})")
+            tab_json = gd.get_json(mode, [lat, lon, centroids])
+            print(tab_json)
     
     elif(mode == "knn"):
         print("kmeans")

@@ -2,23 +2,31 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/add_acc.css">
+        <link rel="stylesheet" href="css/autocomplete.css">
 
         <title>Ajouter un accident</title>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"
+        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
         <script src="js/ajax.js" defer></script>
         <script src="js/addAccident.js" defer></script>
+        <script src="js/city_autocomplete.js" defer></script>
+
     </head>
     <body>
-        <ul>  
+        <ul id="navbar">  
             <li class="left-side"><img src="img/Design_sans_titre.png" height="79" width="79"></li>
-            <li class="left-side"><a href="#Rien">Accidentologie</a></li>
+            <li id="accident" class="left-side"><a href="index.html">Accidentologie</a></li>
             <span class="right-side">
-            <li ><a href="#Accueil">Accueil</a></li>
-            <li ><a href="#Carte">Carte</a></li>
-            <li ><a href="#Prédiction">Prédiction</a></li>
-            <li ><a href="#Form">Ajoutez un accident</a></li>
-            <li ><a href="#Profil">Log in/Sign In</a></li>
+            <li ><a href="index.html">Accueil</a></li>
+            <li ><a href="visu.html">Carte</a></li>
+            <li ><a href="add_acc.html">Ajoutez un accident</a></li>
+            <li ><a  id="prof" href="#Profil">Log in/Sign In</a></li>
              </span>
           </ul>
 
@@ -31,25 +39,16 @@
             <div class="left">
                 <div class="sous-div">
                     <label for="Age">Âge du conducteur:</label><br>
-                    <input type="text" id="Age" name="Age" placeholder="Tapez ici"><br>
+                    <input type="number" min="0" max="100" id="Age" name="Age" placeholder="Tapez ici"><br>
                 </div>
                 <div class="sous-div">
                     <label for="DateTime">Date et Heure:</label><br>
-                    <input type="text" id="DateTime" name="DateTime" placeholder="Tapez ici"><br>   
+                    <input type="datetime-local" id="DateTime" name="DateTime" placeholder="Tapez ici"><br>   
                 </div>
-                <div class="sous-div">
+                <div class="sous-div city_autocomplete">
                     <label for="datetime-local">Ville:</label><br>
                     <input type="text" id="ville" name="ville" placeholder="Tapez ici"><br>
                 </div>
-                <div class="sous-div">
-                    <label for="latitude">Latitude:</label><br>
-                    <input type="text" id="Latitude" name="Latitude" placeholder="Tapez ici"><br>
-                </div>
-                <div class="sous-div">
-                    <label for="lname">Longitude:</label><br>
-                    <input type="text" id="Longitude" name="Longitude" placeholder="Tapez ici"><br>
-                </div>
-                
             </div>
             <div class="right">
                 <div class="sous-div">
@@ -73,7 +72,6 @@
                 <label>Utilisation de la ceinture de sécurité</label><br>
                 <select name="secu" id="secu_select">
                     <option value="">Selectionnez une option</option>
-                    <option value="test">Test</option>
                 </select><br>
             </div>
            
@@ -87,7 +85,7 @@
            
             </div>
             </div>
-            <div class="input-print"><input type="submit" class="submit" value="Ajouter un accident"> </div>
+            <div class="input-print"><input type="submit" id="addAccident" class="submit" value="Ajouter un accident"> </div>
           </form>
           <footer>
             <img src="img/2.png" height="100px" width="100px">
