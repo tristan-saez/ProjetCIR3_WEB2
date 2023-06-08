@@ -43,9 +43,7 @@ function accident(data){
       "<td>" + element['athmo'] + "</td>" +
       "<td>" + element['etat_route'] + "</td>" +
       "<td>" + element['dispo_secu'] + "</td>" +
-      "<td>" + "<a class='button' href='prediction.html'>Gravité</a>" +"</td>" +
-      "<td>" + "<a class='button' href='clustering.html'>Cluster</a>" +
-      "</td>" +
+      "<td>" + "<button class='button' onclick='get_pred("+ element['id_acc'] +")'>Gravité</button>" +"</td>" +
       "</tr>";
     });
 }
@@ -65,10 +63,14 @@ var elementVisible_old = true;
       var map = document.getElementById("map");
       if(elementVisible_old){
         map.style.display="none";
-        elementVisible_old=false;        
+        elementVisible_old=false;
+        document.getElementById("old_acc_f").style.backgroundColor = "white";
+        document.getElementById("old_acc_f").style.color = "#426B1F";  
       }else{
         map.style.display="block";
         elementVisible_old=true;
+        document.getElementById("old_acc_f").style.backgroundColor = "#426B1F";
+        document.getElementById("old_acc_f").style.color = "white";  
       }
       
     }
@@ -88,10 +90,14 @@ var new_map = true;
       var map = document.getElementById("map2");
       if(elementVisible_new){
         map.style.display="none";
-        elementVisible_new=false;        
+        elementVisible_new=false;
+        document.getElementById("new_acc_f").style.backgroundColor = "white";
+        document.getElementById("new_acc_f").style.color = "#426B1F";       
       }else{
         map.style.display="block";
         elementVisible_new=true;
+        document.getElementById("new_acc_f").style.backgroundColor = "#426B1F";
+        document.getElementById("new_acc_f").style.color = "white";  
       }
 
     }
@@ -141,7 +147,7 @@ function  ancien_acc_scatter(data){
         lat: 48.8584,
         lon: 2.2945
       },
-      zoom: 2
+      zoom: 4
     },  
     geo: {
       projection: {
@@ -201,7 +207,7 @@ function accident_scatter(data){
         lat: 48.8584,
         lon: 2.2945
       },
-      zoom: 2
+      zoom: 4
     },  
     geo: {
       projection: {

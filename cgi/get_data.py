@@ -12,6 +12,7 @@ import sys
 import pickle as pk
 import numpy as np
 import pandas as pd
+import os
 # import repartition_données as rpd
 # import kNN_scikit as k_sci
 
@@ -21,12 +22,14 @@ def get_cluster(lat, lon, centroids):
     get nearest cluster from point
 
     """
-    dist = 100000000000000
+    dist = -1
     cluster = 0
 
     for centroid in enumerate(centroids):
-        dist_temp = np.sqrt((lat - lon) ** 2 + (centroid[1][0] - centroid[1][1]) ** 2)
-        if dist_temp < dist:
+        dist_temp = np.sqrt((lat - centroid[1][1]) ** 2 + (lon - centroid[1][0]) ** 2)
+        
+        if dist_temp < dist or dist == -1:
+            
             dist = dist_temp
             cluster = centroid[0]
 
@@ -39,68 +42,65 @@ def get_json(mode, parameters):
     """
     if mode == "kmeans":
         try:
-            LAT = float(parameters[0])
-            LON = float(parameters[1])
-            centroids_input = np.array(np.float_(parameters[2].replace("[", "").replace("]","").split(", "))).reshape(-1, 2)
+            LAT = np.array(np.float_(parameters[0]))
+            LON = np.array(np.float_(parameters[1]))
+            centroids = parameters[2]
 
         except IndexError:
             print(
                 "Arguments seem to be missing, try running command with args for LAT, LON & centroids\n"
             )
             sys.exit(1)
+        point = []
 
-        cluster_id = get_cluster(LAT, LON, centroids_input)
+        for element in enumerate(LAT):
+            cluster_id = get_cluster(LAT[element[0]], LON[element[0]], centroids)
+            point.append({"cluster": cluster_id, "latitude": LAT[element[0]], "longitude":LON[element[0]]})
 
-        tab_json = pd.DataFrame(
+        tab_json_point = pd.DataFrame(
             {
-                "point": {"id": None, "lat": LAT, "lon": LON},
-                "cluster": {
-                    "id": cluster_id,
-                    "lat": centroids_input[cluster_id][0],
-                    "lon": centroids_input[cluster_id][1],
-                },
+                "point": point
+            }
+        ).to_json()
+        tab_cluster = pd.DataFrame(
+            {
+                "clusters": centroids
             }
         ).to_json()
 
+        tab_json = tab_json_point[:-1] + "," + tab_cluster[1:]
+
         return tab_json
 
-    # elif mode == "knn":
-    #     try:
-    #         info_acc = list(parameters[2:9])
-    #         CSV = str(parameters[9])
-    #     except IndexError:
-    #         print(
-    #             "Arguments seem to be missing, try running command with args for info_acc & CSV\n"
-    #         )
-    #         sys.exit(1)
-
-    #     df = pd.read_csv(CSV, sep=",")
-    #     acc = pd.DataFrame(columns=df.columns.drop("descr_grav"), data=[info_acc])
-
-    #     X_train, X_test, y_train, y_test = rpd.hold_out(CSV)
-    #     test_preds, knn_model = k_sci.kNN_scikit(df, X_train, X_test, y_train, y_test)
-    #     predict = knn_model.predict(acc.values).round()
-
-    #     print("Gravite predite : ", predict[0])
-    #     pd.Series({"pred_grav": predict[0]}).to_json("pred_grav_KNN.json")
-
-
     elif mode == "classification":
+        info_acc = parameters
+        pred_grav_dict = {"KNN":0, "MLP":0, "SVM":0, "RandomForest":0}
+        methode_tab = ["KNN", "MLP", "SVM", "RandomForest"]
+
         try:
-            info_acc = list(parameters[2:6])
-            methode = str(parameters[6])
-            return [info_acc, methode]
+            info_acc[2]
         except IndexError:
             print(
-                "Arguments seem to be missing, try running command with args for info_acc & methode\n"
+                "Arguments seem to be missing, try running command with args for info_acc & methode\n"  
             )
             sys.exit(1)
-        # model = pk.load(open(f"{methode}.sav", 'rb'))
-        # acc = pd.DataFrame(columns=("descr_cat_veh","descr_lum","description_intersection","descr_type_col"), data=[info_acc])
-        # result = model.predict(acc)
 
-        # print("Gravite predite : ", result)
-        # return pd.Series({"pred_grav": result[0]}).to_json()
+        acc = pd.DataFrame(columns=("latitude", "longitude", "descr_cat_veh","descr_lum", "description_intersection","an_nais","descr_type_col"), data=[info_acc])
+
+        for methode in methode_tab:
+            
+            model = pk.load(open(f"/var/www/etu110/cgi/{methode}.sav", 'rb'))
+            if methode == "KNN":
+                pred_grav_dict[methode] = model.predict(acc).round()
+            else:
+                pred_grav_dict[methode] = model.predict(acc.drop(["latitude", "longitude", "an_nais"], axis=1))
+
+            if(pred_grav_dict[methode] == 1): 
+                pred_grav_dict[methode] = "Accident grave"
+            else:
+                pred_grav_dict[methode] = "Accident léger"
+        
+        return pd.Series(pred_grav_dict).to_json()
 
     else:
         print(

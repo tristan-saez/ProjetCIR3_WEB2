@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="css/visu.css">
+        <link rel="stylesheet" href="css/autocomplete.css">
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"
         integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
@@ -10,19 +11,27 @@
         <script src="js/ajax.js"></script>
         <script src="js/filtreAcc.js"></script>
         <script src="js/visu.js"></script>
-        <title>Carte</title>
+        <script src="js/prediction.js"></script>
+        <script src="js/city_autocomplete.js" defer></script>
+
+        <title>Visualisation des données</title>
+        <link rel="icon" href="img/logo_nobg_white.png">
     </head>
     <body>
-        <ul>  
-            <li class="left-side"><img src="img/Design_sans_titre.png" height="79" width="79"></li>
-            <li class="left-side"><a href="index.html">Accidentologie</a></li>
-            <span class="right-side">
-            <li ><a href="index.html">Accueil</a></li>
-            <li ><a href="visu.html">Carte</a></li>
-            <li ><a href="add_acc.html">Ajoutez un accident</a></li>
-            <li ><a href="#Profil">Log in/Sign In</a></li>
-             </span>
-          </ul>
+            <!-- NAVBAR -->
+            <ul id="navbar">
+              <span class="left-side">
+                <li><img src="img/Design_sans_titre.png" height="79" width="79"></li>
+                <li><a href="index.html">Accidentologie</a></li>
+              </span>
+              <span class="right-side">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="visu.html">Carte</a></li>
+                <li><a href="add_acc.html">Ajouter un accident</a></li>
+                <li><a href="#Profil">Log in/Sign In</a></li>
+                
+              </span>
+            </ul>
 
           <div class="center">
             <p>La carte</p>
@@ -35,9 +44,9 @@
           <div class="filter">
             <div class="container-header">
             <img class="material-symbols-outlined" src="img/filter_alt_FILL0_wght400_GRAD0_opsz48.png">
-            <button id="filter-toggle">Filter</button>
-              <button  class="change-filter" onclick="new_acc()">Nouveaux accidents</button>
-              <button  class="change-filter" onclick="old_acc()">Anciens accidents</button>
+            <button id="filter-toggle">Filtre</button>
+              <button  class="change-filter" id="new_acc_f" onclick="new_acc()">Nouveaux accidents</button>
+              <button  class="change-filter" id="old_acc_f" onclick="old_acc()">Anciens accidents</button>
              <div class="buttons">
                 <button id="apply-filter" class="apply-filter">Appliquer</button>
                 <button id="clean-filter-btn" class="clean-filter-btn">Clean</button>
@@ -52,14 +61,14 @@
                   </select>
                 </div>
           
-                <div class="filter-column">
-                  <label for="color">Ville:</label>
-                  <input id="color" placeholder="Brest">
+                <div class="filter-column city_autocomplete">
+                  <label for="ville">Ville:</label>
+                  <input id="ville" placeholder="Brest">
                 </div>
           
                 <div class="filter-column">
-                  <label for="size">Âge:</label>
-                  <select id="size">
+                  <label for="age">Âge:</label>
+                  <select id="age">
                     <option value="all">All</option>
                     <option value="18-20">18-20</option>
                     <option value="20-30">20-30</option>
@@ -70,42 +79,37 @@
                     <option value="80-90">80-90</option>
 
                   </select>
-<<<<<<< HEAD
                   </div>
                   <div class="filter-column">
-                  <label class="lumi" for="lumi">Luminosité</label>
+                  <label class="lumi" for="lumi">Luminosité:</label>
                   <select id="lumi">
                     <option value="all">All</option>
                   </select>
                   </div>
+                  <div class="filter-column">
+                    <label class="surf" for="surf">Surface:</label>
+                    <select id="surf">
+                      <option value="all">All</option>
+                    </select>
+                    </div>
+                    <div class="filter-column">
+                      <label class="secu" for="secu">Securité:</label>
+                      <select id="secu">
+                        <option value="all">All</option>
+                      </select>
+                      </div>
                 </div>     
-=======
-
-                  <label class="lumi" for="lumi">Luminosité</label>
-                  <select id="lumi">
-                    <option value="All">All</option>
-                    <option value="Test">Test</option>
-                  </select>
-                </div>
-              </div>          
->>>>>>> 497c53f1618857c0d714b925937491aa75eee35d
               <div id="selected-filters" class="selected-filters"></div>
             </div>
           </div>
 
-<<<<<<< HEAD
-          <div id="map" class="plotly"></div>
           <div id="map2" class="plotly"></div>
-=======
-          <div class="plotly"></div>
->>>>>>> 497c53f1618857c0d714b925937491aa75eee35d
+          <div id="map" class="plotly"></div>
           <div class="links">
             <a href="clustering.html">Prédire un cluster</a>
-            <a href="prediction.html">Prédire la gravité d'accident</a>
             <a href="add_acc.html">Ajouter un accident</a>
           </div>
 
-<<<<<<< HEAD
           <table id="SIUUU" class="tableau">
             <tr>
               <th>Horodatage</th>
@@ -120,8 +124,6 @@
             </tr>
           </table>
         
-=======
->>>>>>> 497c53f1618857c0d714b925937491aa75eee35d
           <footer>
             <img src="img/2.png" height="100px" width="100px">
             <p>Projet Web dynamique A3</p>
@@ -129,95 +131,6 @@
             <p>2023</p>
           </footer>
 
-     <script>
-      var filterToggle = document.getElementById("filter-toggle");
-var filterMenu = document.getElementById("filter-menu");
-var applyFilterBtn = document.getElementById("apply-filter");
-var selectedFiltersElem = document.getElementById("selected-filters");
-<<<<<<< HEAD
-var cleanFilterBtn = document.getElementById("clean-filter-btn");
-=======
-var cleanFilterBtn = document.getElementById("clean-filter-btn")
->>>>>>> 497c53f1618857c0d714b925937491aa75eee35d
-filterToggle.addEventListener("click", function() {
-  if (filterMenu.style.display === "block") {
-    filterMenu.style.display = "none";
-  } else {
-    filterMenu.style.display = "block";
-  }
-});
-
-    applyFilterBtn.addEventListener("click", function() {
-<<<<<<< HEAD
-  var typeFilter = document.getElementById("athmo").value;
-=======
-  var typeFilter = document.getElementById("type").value;
->>>>>>> 497c53f1618857c0d714b925937491aa75eee35d
-  var colorFilter = document.getElementById("color").value;
-  var sizeFilter = document.getElementById("size").value;
-  var lumiFilter = document.getElementById("lumi").value;
-  var selectedFilters = [];
-  var existingFilters = [];
-
-  // Récupérer les filtres existants dans la liste
-  var existingFiltersElements = selectedFiltersElem.getElementsByClassName("selected-filter");
-  for (var i = 0; i < existingFiltersElements.length; i++) {
-    var existingFilterText = existingFiltersElements[i].textContent.trim();
-    existingFilters.push(existingFilterText);
-  }
-
-  // Ajouter les nouveaux filtres s'ils ne sont pas déjà présents
-  if (typeFilter !== "all" && !existingFilters.includes(typeFilter)) {
-    selectedFilters.push(typeFilter);
-  }
-
-<<<<<<< HEAD
-  if (colorFilter !== "all" && colorFilter !=="" && !existingFilters.includes(colorFilter)) {
-=======
-  if (colorFilter !== "all" && !existingFilters.includes(colorFilter)) {
->>>>>>> 497c53f1618857c0d714b925937491aa75eee35d
-    selectedFilters.push(colorFilter);
-  }
-
-  if (sizeFilter !== "all" && !existingFilters.includes(sizeFilter)) {
-    selectedFilters.push(sizeFilter);
-  }
-
-  if (lumiFilter !== "all" && !existingFilters.includes(lumiFilter)) {
-    selectedFilters.push(lumiFilter);
-  }
-
-  // Mettre à jour la liste des filtres sélectionnés dans le HTML
-  var selectedFiltersHTML = "";
-  for (var j = 0; j < selectedFilters.length; j++) {
-    selectedFiltersHTML += '<div class="selected-filter">' + selectedFilters[j] + '<span class="remove-filter" onclick="removeFilter(this)">x</span></div>';
-  }
-
-  selectedFiltersElem.innerHTML = selectedFiltersHTML;
-  //Ajoutez en bas une requete ajax l'interaction avec la base de données ou avec plotly
-});
-
-
-function removeFilter(elem) {
-      var selectedFilter = elem.parentNode;
-      selectedFilter.parentNode.removeChild(selectedFilter);
-    }
-
-    cleanFilterBtn.addEventListener("click", function() {
-  selectedFiltersElem.innerHTML = "";
-<<<<<<< HEAD
-  document.getElementById("athmo").value = "all";
-=======
-  document.getElementById("type").value = "all";
->>>>>>> 497c53f1618857c0d714b925937491aa75eee35d
-  document.getElementById("color").value = "all";
-  document.getElementById("size").value = "all";
-});
-
-<<<<<<< HEAD
-console.log(selectedFilters);
-=======
->>>>>>> 497c53f1618857c0d714b925937491aa75eee35d
-     </script>
+          <script src="js/filterVisu.js"></script>
     </body>
 </html>

@@ -11,8 +11,9 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="css/homepage.css">
 
-        <title>Accueil</title>
-        
+        <title>Page d'accueil</title>
+        <link rel="icon" href="img/logo_nobg_white.png">
+
         <script src="js/ajax.js"></script>
         <script src="js/pop_up.js" defer></script>
     </head>
@@ -35,15 +36,19 @@
 
       <!-- NAVBAR -->
         <ul>
-          <li class="left-side"><img src="img/Design_sans_titre.png" height="79" width="79"></li>
-          <li class="left-side"><a href="index.html">Accidentologie</a></li>
+          <span class="left-side">
+            <li><img src="img/Design_sans_titre.png" height="79" width="79"></li>
+            <li><a href="index.html">Accidentologie</a></li>
+          </span>
           <span class="right-side">
             <li><a href="index.html">Accueil</a></li>
             <li><a href="visu.html">Carte</a></li>
-            <li><a href="add_acc.html">Ajoutez un accident</a></li>
+            <li><a href="add_acc.html">Ajouter un accident</a></li>
             <li><a href="#Profil">Log in/Sign In</a></li>
           </span>
         </ul>
+
+        <!-- CAROUSEL -->
         <div class="carousel">
           <div id="text_carousel">
             <h3>Application d'étude des accidents de la route</h3>
@@ -51,7 +56,8 @@
           </div>
         </div>
         <div class="descr">
-          <h3>Notre Projet</h3>
+          <div class="descr_cont">
+            <h3>Notre Projet</h3>
             <p>
               Ce site web a été réalisé dans le cadre d'un Projet de troisième année
               à l'ISEN Ouest - Brest.
@@ -61,6 +67,7 @@
               contenant les accidents de la route en France en 2009. Sur ce site vous retrouverez la partie visuelle
               de notre projet dont une carte représentant les accidents de la route et une page pour en ajouter un.
             </p>
+          </div>
         </div>
         <div class="div_infos">
           <h3>Les accidents de la route en chiffres</h3>

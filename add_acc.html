@@ -8,8 +8,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/add_acc.css">
         <link rel="stylesheet" href="css/autocomplete.css">
-
-        <title>Ajouter un accident</title>
+        
+        <title>Page d'ajout d'accident</title>
+        <link rel="icon" href="img/logo_nobg_white.png">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"
         integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
@@ -19,16 +20,19 @@
 
     </head>
     <body>
-        <ul id="navbar">  
-            <li class="left-side"><img src="img/Design_sans_titre.png" height="79" width="79"></li>
-            <li id="accident" class="left-side"><a href="index.html">Accidentologie</a></li>
+        <!-- NAVBAR -->
+        <ul>
+            <span class="left-side">
+              <li><img src="img/Design_sans_titre.png" height="79" width="79"></li>
+              <li><a href="index.html">Accidentologie</a></li>
+            </span>
             <span class="right-side">
-            <li ><a href="index.html">Accueil</a></li>
-            <li ><a href="visu.html">Carte</a></li>
-            <li ><a href="add_acc.html">Ajoutez un accident</a></li>
-            <li ><a  id="prof" href="#Profil">Log in/Sign In</a></li>
-             </span>
-          </ul>
+              <li><a href="index.html">Accueil</a></li>
+              <li><a href="visu.html">Carte</a></li>
+              <li><a href="add_acc.html">Ajoutez un accident</a></li>
+              <li><a href="#Profil">Log in/Sign In</a></li>
+            </span>
+        </ul>
 
           <div class="center">
             <p>Ajout d'accident</p>
@@ -82,10 +86,31 @@
                     <option value="">Selectionnez une option</option>
                 </select><br>
             </div>
+
+            <div class="sous-div">
+                <label>Catégorie de véhicule</label><br>
+                <select name="cat_veh" id="cat_veh_select">
+                    <option value="">Selectionnez une option</option>
+                </select><br>
+            </div>
+
+            <div class="sous-div">
+                <label>Description Intersection</label><br>
+                <select name="inter" id="inter_select">
+                    <option value="">Selectionnez une option</option>
+                </select><br>
+            </div>
+
+            <div class="sous-div">
+                <label>Type de Collision</label><br>
+                <select name="type_col" id="type_col_select">
+                    <option value="">Selectionnez une option</option>
+                </select><br>
+            </div>
            
             </div>
             </div>
-            <div class="input-print"><input type="submit" id="addAccident" class="submit" value="Ajouter un accident"> </div>
+            <div class="input-print"><input type="submit" id="addAccident" class="submit" value="Ajouter"> </div>
           </form>
           <footer>
             <img src="img/2.png" height="100px" width="100px">

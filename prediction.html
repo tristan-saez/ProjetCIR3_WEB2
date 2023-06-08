@@ -1,54 +1,67 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="css/prediction.css">
-        <script src="js/prediction.js"></script>
-        <title>Prediction</title>
-    </head>
-    <body>
-        <ul>  
-            <li class="left-side"><img src="img/Design_sans_titre.png" height="79" width="79"></li>
-            <li class="left-side"><a href="index.html">Accidentologie</a></li>
-            <span class="right-side">
-            <li ><a href="index.html">Accueil</a></li>
-            <li ><a href="visu.html">Carte</a></li>
-            <li ><a href="add_acc.html">Ajoutez un accident</a></li>
-            <li ><a href="#Profil">Log in/Sign In</a></li>
-             </span>
-          </ul>
 
-          <div class="center">
-            <p>La gravité des accidents</p>
-          </div>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/prediction.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"
+  integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="js/prediction_display.js" defer></script>
+
+  <title>Prédiction des clusters</title>
+  <link rel="icon" href="img/logo_nobg_white.png">
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <ul>
+    <span class="left-side">
+      <li><img src="img/Design_sans_titre.png" height="79" width="79"></li>
+      <li><a href="index.html">Accidentologie</a></li>
+    </span>
+    <span class="right-side">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="visu.html">Carte</a></li>
+      <li><a href="add_acc.html">Ajoutez un accident</a></li>
+      <li><a href="#Profil">Log in/Sign In</a></li>
+    </span>
+  </ul>
+
+  <div class="center">
+    <p>La gravité des accidents</p>
+  </div>
 
 
-          <div class="Container">
-            <div class="sub-container">
-              <div class="left text">Test</div>
-              <div class="right"><img src="img\pexels-rachel-claire-4992452.jpg" height="648" width="432"></div>      <!--432 648-->
-            </div>
-            <div class="sub-container">
-              <div class="left"><img src="img\pexels-rachel-claire-4992453.jpg" height="648" width="432"></div>
-              <div class="right text">Test</div>
+  <div class="Container">
+    <div class="sub-container">
+      <div class="left text">
+        <h2>Résulats des prédictions</h2>
+          <li>Méthode KNN: <span id="KNN">/</span></li>
+          <li>Méthode SVM: <span id="SVM">/</span></li>
+          <li>Méthode Random Forest: <span id="RandomForest">/</span></li>
+          <li>Méthode MLP: <span id="MLP">/</span></li>
+      </div>
+      <div class="right"><img src="img\pexels-rachel-claire-4992452.jpg" height="648" width="432"></div> <!--432 648-->
+    </div>
+    <div class="sub-container">
+      <div class="left"><img src="img\pexels-rachel-claire-4992453.jpg" height="648" width="432"></div>
+      <div class="right text">
+        <h2>Comparaisons des méthodes</h2>
+        <li>Méthode KNN:</li>
+        <li>Méthode SVM:</li>
+        <li>Méthode Random Forest:</li>
+        <li>Méthode MLP:</li>
+      </div>
+    </div>
+  </div>
 
-            </div>
-            <div class="sub-container">
-              <div class="left text">Test</div>
-              <div class="right"><img src="img\pexels-rachel-claire-4992456.jpg" height="648" width="432"></div>
-            </div>
-            <div class="sub-container">
-              <div class="left"><img src="img\pexels-rachel-claire-4992460.jpg" height="648" width="432"></div>
-              <div class="right text">Test</div>
-              
-            </div>
-          </div>
+  <footer>
+    <img src="img/2.png" height="100px" width="100px">
+    <p>Projet Web dynamique A3</p>
+    <p>Groupe 1 - Trinôme 1</p>
+    <p>2023</p>
+  </footer>
+</body>
 
-          <footer>
-            <img src="img/2.png" height="100px" width="100px">
-            <p>Projet Web dynamique A3</p>
-            <p>Groupe 1 - Trinôme 1</p>
-            <p>2023</p>
-          </footer>
-    </body>
-    </html>
+</html>

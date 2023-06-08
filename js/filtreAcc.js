@@ -2,7 +2,8 @@
 
 ajaxRequest('POST', 'php/request.php/listLum', listeLum);
 ajaxRequest('POST', 'php/request.php/listAthmo', listeAthmo);
-
+ajaxRequest('POST', 'php/request.php/listRoute', listeRoute);
+ajaxRequest('POST', 'php/request.php/listDispo_secu', listeDispo_secu);
 
 
 
@@ -52,13 +53,17 @@ function filtrage(tab_acc) {
             
     }
 
+    function replaceMultipleDashes(str) {
+        return str.replace(/-+/g, '-');
+      }
+
 function listeLum(tab_lum) {
     //console.log(tab_lum);
     var selectLum = document.getElementById('lumi');
     
     tab_lum.forEach(lum => {
         selectLum.innerHTML +=
-            "<option value=" + lum['lum'] + ">" + lum['lum'] + "</option>" ;
+            "<option value=" + lum['lum'].replace(/ /g,'-') + ">" + lum['lum'] + "</option>" ;
     });
 }
 
@@ -68,6 +73,23 @@ function listeAthmo(tab_athmo) {
     
     tab_athmo.forEach(athmo => {
         selectAthmo.innerHTML +=
-            "<option value=" + athmo['athmo'] + ">" + athmo['athmo'] + "</option>" ;
+            "<option value=" + athmo['athmo'].replace(/ /g,'-') + ">" + athmo['athmo'] + "</option>" ;
+    });
+}
+
+function listeRoute(tab_route) {
+    var selectRoute = document.getElementById('surf');
+    // console.log(tab_route);
+    tab_route.forEach(route => {
+        selectRoute.innerHTML +=
+        "<option value=" + route['etat_route'].replace(/ /g,'-') + ">" + route['etat_route'] + "</option>" ;
+    });
+}
+
+function listeDispo_secu(tab_secu) {
+    var selectSecu = document.getElementById('secu');
+    tab_secu.forEach(secu => {
+        selectSecu.innerHTML +=
+        "<option value=" + secu['dispo_secu'].replace(/ /g,'-') + ">" + secu['dispo_secu'] + "</option>" ;
     });
 }

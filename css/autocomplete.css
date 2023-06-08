@@ -1,6 +1,6 @@
 /* AUTOCOMPLETE RELATED CONTENT */
 
-#autocomplete {
+ul#autocomplete {
     position:absolute;
     margin:0;
     background-color: white;
@@ -11,8 +11,10 @@
     list-style: none;
     font-size: 0.9em;
     padding: 0;
+    z-index: 10;
 }
-.city_auto {
+li.city_auto {
+    padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 2%;
     color: #7e7e7e;
@@ -20,7 +22,7 @@
     border-radius: 10px;
     display: list-item;
 }
-.city_auto:hover {
+li.city_auto:hover {
     color: #729F4B;
     background-color: #e1e1e1;
 }
