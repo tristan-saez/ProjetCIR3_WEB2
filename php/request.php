@@ -23,7 +23,6 @@
     if ($id == '') $id = NULL;
     $data = false;
 
-
     if ($requestMethod == "POST") {
         if ($requestRessource == "addAccident") {
 
@@ -32,11 +31,9 @@
             isset($_POST['athmo']) && isset($_POST['etat_route']) && isset($_POST['dispo_secu']) && 
             isset($_POST['descr_cat_veh']) && isset($_POST['descr_inter']) && isset($_POST['descr_type_col'])){
                 
-                //var_dump($_POST['horodatage']);
                 $data = dbInsertAccident($db, $_POST['horodatage'], 
                 $_POST['an_nais_conduct'], $_POST['insee'], $_POST['lum'], $_POST['athmo'], $_POST['etat_route'],
                 $_POST['dispo_secu'], $_POST['descr_cat_veh'], $_POST['descr_inter'], $_POST['descr_type_col']);
-                // var_dump($data);
             }
             else {
                 $data = "request";
@@ -92,18 +89,6 @@
         }
     }
 
-    if ($requestMethod == 'POST') {
-        if ($requestRessource == 'filtre') {
-            // $var = "test filtre";
-            // var_dump($var);
-            // echo "test filtre";
-            //var_dump($_POST['sport']);
-            setcookie('maxAcc', $_POST['cookies_max'], time() + 60 * 60);
-            $data = dbRequestAcc($db ,$_POST['athmo'], $_POST['an_nais'], $_POST['lum']);
-            // $data = "testfiltre";
-        }
-    }
-
     if($requestMethod=='POST'){
         if($requestRessource =='ancien_acc'){
             $data = dbRequestAncienAcc($db);
@@ -149,8 +134,6 @@
         $data =dbRequestRoute($db);
         }
     }
-
-
 
     // Send data to the client.
     header('Content-Type: application/json; charset=utf-8');

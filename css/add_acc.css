@@ -63,13 +63,13 @@ li a:hover {
   order: 2;
 }
 
-li a[href="#Profil"] {
+li a#marmiton {
   background-color: #426B1F;
   color: white;
   border-radius: 8px;
 }
 
-li a[href="#Profil"]:hover {
+li a#marmiton:hover {
   background-color: #599A22;
 
 }

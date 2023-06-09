@@ -25,9 +25,12 @@ else:
     # lecture de la valeur de l'attribut dans une variable
     mode = form["arguments"].value.split(",")[0]
 
+    #Le script extrait les valeurs des paramètres lat, lon et centroids à partir de la valeur de l'attribut.
     if(mode == "kmeans"):
             lat = form["arguments"].value.split(",")[1].split("_")
             lon = form["arguments"].value.split(",")[2].split("_")
+
+            #centroids calculés avec la méthode kmeans scikit-learn
             centroids = [[0.628019,48.82026],
                     [-60.73254679,14.81604711],
                     [55.38989084,-21.04071756],
@@ -41,12 +44,17 @@ else:
                     [4.71464448,45.89264986],
                     [2.82381573,50.43920805]]
 
+
+#Le script utilise ces valeurs pour appeler la fonction get_json() du module get_data et stocke le résultat dans la variable tab_json. 
+# Ensuite, le script affiche tab_json.
             tab_json = gd.get_json(mode, [lat, lon, centroids])
             print(tab_json)
-    
+
+    #si monde vaut knn on affiche knn
     elif(mode == "knn"):
         print("knn")
 
+    # si mode vaut classification,  le script extrait les données qui le concerne
     elif(mode == "classification"):
         result = form["arguments"].value.split(",")[1].split("_")
 

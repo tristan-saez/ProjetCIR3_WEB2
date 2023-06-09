@@ -10,22 +10,22 @@ if (!localStorage.getItem('cookiesAccepted')) {
   
   // Écouter les événements des boutons
   document.getElementById('acceptCookies').addEventListener('click', function() {
-    // Enregistrer la décision de l'utilisateur dans le stockage local
-    // ----------------------
-    //localStorage.setItem('cookiesAccepted', true);
     var max = document.getElementById('cookie_max');
-    console.log(max.value);
-    // ajaxRequest("POST", 'php/request.php/filtre', "cookies_max=" + max.value );  
-    // Masquer la pop-up des cookies
+    cookie('cookie_max', max.value, 1);
     document.getElementById('cookiePopup').style.display = 'none';
   });
   
   document.getElementById('declineCookies').addEventListener('click', function() {
-    // Supprimer la décision précédente de l'utilisateur du stockage local
-    // ----------------------
-    //localStorage.removeItem('cookiesAccepted');
-
-    // Masquer la pop-up des cookies
     document.getElementById('cookiePopup').style.display = 'none';
   });
-  
+
+  //Récupère les infos pour cookies et envoit vers back-end
+  function cookie(name, value, hours) {
+    var expires = '';
+    if (hours) {
+      var date = new Date();
+      date.setTime(date.getTime() + hours * 60 * 60 * 1000);
+      expires = '; expires=' + date.toUTCString();
+    }
+    document.cookie = name + '=' + value + expires + '; path=../php/';
+  }

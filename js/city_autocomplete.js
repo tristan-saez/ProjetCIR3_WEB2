@@ -45,7 +45,7 @@ function selectItem(city) {
     field[0].value = city;
 }
 
-// when client is typing if 3 or more characters is in the input, get autocompletion
+// when client is typing if 1 or more characters is in the input, get autocompletion
 $('.city_autocomplete').keyup(() => {
     let field = $('.city_autocomplete :input');
     

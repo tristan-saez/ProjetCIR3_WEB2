@@ -1,5 +1,6 @@
 'use strict';
 
+//chaque requête permet de récupérer les différentes listes de paramètres pour les accidents
 ajaxRequest('POST', 'php/request.php/listLum', listeLum);
 ajaxRequest('POST', 'php/request.php/listAthmo', listeAthmo);
 ajaxRequest('POST', 'php/request.php/listRoute', listeRoute);
@@ -21,16 +22,22 @@ var valCat_veh = document.getElementById('cat_veh_select');
 var valInter = document.getElementById('inter_select');
 var valType_col = document.getElementById('type_col_select');
 
+// Getionnaire d'évènement avec click concernant l'id #addAccident
 $('#addAccident').click((event) => {
 
     event.preventDefault();
 
+    //Extraction du code insee
+    // extrait la valeur de l'élément avec l'ID valInsee 
+    //On découpe en utilisant l'espace comme séparateur, puis on affiche le quatrième élément (index 3).
+    // Puis on remplace le caractère ")" par une chaîne vide pour obtenir la valeur finale de 
     let insee = valInsee.value.split(" ")[3].replace(")", "")
-    console.log(valDate.value +
-        "&an_nais_conduct=" + valAn_nais.value + "&insee=" + insee + "&lum=" +
-        valLum.value + "&athmo=" + valAthmo.value + "&etat_route=" + valRoute.value +
-        "&dispo_secu=" + valSecu.value + "&descr_cat_veh=" + valCat_veh.value + 
-        "&descr_inter=" + valInter.value + "&descr_type_col=" + valType_col.value)
+    
+    // console.log(valDate.value +
+    //     "&an_nais_conduct=" + valAn_nais.value + "&insee=" + insee + "&lum=" +
+    //     valLum.value + "&athmo=" + valAthmo.value + "&etat_route=" + valRoute.value +
+    //     "&dispo_secu=" + valSecu.value + "&descr_cat_veh=" + valCat_veh.value + 
+    //     "&descr_inter=" + valInter.value + "&descr_type_col=" + valType_col.value)
     
     ajaxRequest("POST", 'php/request.php/addAccident', addAccident, "horodatage=" + valDate.value +
         "&an_nais_conduct=" + valAn_nais.value + "&insee=" + insee + "&lum=" +
@@ -41,8 +48,9 @@ $('#addAccident').click((event) => {
 );
 
 
+//Callback de la requête AJAX concernant l'ajout d'accident, redirige vers les cartes lors d'une création d'accident réussie
 function addAccident(data) {
-    console.log(data);
+    // console.log(data);
     if (data == "request") {
         alert("Un problème lors de la requête est survenu");
     }
@@ -54,8 +62,8 @@ function addAccident(data) {
     }
 }
 
+//affiche la liste des différentes luminosité
 function listeLum(tab_lum) {
-    // console.log(tab_lum);
     var selectLum = document.getElementById('lumi_select');
     
     tab_lum.forEach(lum => {
@@ -64,8 +72,8 @@ function listeLum(tab_lum) {
     });
 }
 
+//affiche la liste des états athmosphériques
 function listeAthmo(tab_athmo) {
-    // console.log(tab_athmo);
     var selectAthmo = document.getElementById('atmo_select');
     
     tab_athmo.forEach(athmo => {
@@ -74,15 +82,16 @@ function listeAthmo(tab_athmo) {
     });
 }
 
+//affiche la liste des états de la route
 function listeRoute(tab_route) {
     var selectRoute = document.getElementById('route_select');
-    // console.log(tab_route);
     tab_route.forEach(route => {
         selectRoute.innerHTML +=
         `<option value="${route['etat_route']}">${route['etat_route']}</option>` ;
     });
 }
 
+//affiche la liste des dispositifs de sécutité
 function listeDispo_secu(tab_secu) {
     var selectSecu = document.getElementById('secu_select');
     tab_secu.forEach(secu => {
@@ -91,6 +100,7 @@ function listeDispo_secu(tab_secu) {
     });
 }
 
+//affiche la liste des catégories de véhicule
 function listeCat_veh(tab_cat_veh) {
     var selectCat_veh = document.getElementById('cat_veh_select');
     tab_cat_veh.forEach(cat_veh => {
@@ -99,6 +109,7 @@ function listeCat_veh(tab_cat_veh) {
     });
 }
 
+//affiche la liste des intersections
 function listeInter(tab_inter) {
     var selectInter = document.getElementById('inter_select');
     tab_inter.forEach(inter => {
@@ -107,6 +118,7 @@ function listeInter(tab_inter) {
     });
 }
 
+//affiche la liste des types de colisions
 function listeType_col(tab_type_col) {
     var selectType_col = document.getElementById('type_col_select');
     tab_type_col.forEach(type_col => {

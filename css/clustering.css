@@ -64,13 +64,13 @@ li a:hover {
   order: 2;
 }
 
-li a[href="#Profil"] {
+li a#marmiton {
   background-color: #426B1F;
   color: white;
   border-radius: 8px;
 }
 
-li a[href="#Profil"]:hover {
+li a#marmiton:hover {
   background-color: #599A22;
 
 }
@@ -89,7 +89,6 @@ li a[href="#Profil"]:hover {
 }
 
 #map {
-  height: 600px;
   display: flex;
   flex-direction: row;
   font-family:'Newsreader',  sans-serif;
@@ -99,17 +98,7 @@ li a[href="#Profil"]:hover {
   border-style: dotted;
   width:90%;
   margin: 20px auto;
-
 }
-
-/* .plotly {
-  height: 500px;
-  width: 500px;
-  background-color: #c2c2c2;
-  display: flex;
-  flex-direction: row;
-  margin: auto;
-} */
 
 footer {
   background-color: #1E1E1E;

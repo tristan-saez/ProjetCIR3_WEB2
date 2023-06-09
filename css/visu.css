@@ -62,13 +62,13 @@ li a:hover {
   order: 2;
 }
 
-li a[href="#Profil"] {
+li a#marmiton {
   background-color: #426B1F;
   color: white;
   border-radius: 8px;
 }
 
-li a[href="#Profil"]:hover {
+li a#marmiton:hover {
   background-color: #599A22;
 
 }
@@ -126,6 +126,7 @@ h3 {
   display: flex;
   flex-direction: row;
   margin-left: 100px;
+  font-family: "Newsreader", sans-serif;
 }
 
 button:nth-child(1) {
@@ -146,6 +147,15 @@ button {
   padding: 0;
   margin: 0;
 
+}
+
+ #filter-toggle{
+  background-color: black;
+  color:white;
+}
+
+ #filter-toggle:hover{
+  background-color: #333;
 }
 
 button:hover {
@@ -203,10 +213,12 @@ button:hover {
   color: white;
   border-radius: 10px;
   cursor:pointer;
+  font-family: "Newsreader", sans-serif;
 }
 
 .clean-filter-btn {
   border: 1px solid #C2C2C2;
+  font-family: "Newsreader", sans-serif;
 }
 
 input:nth-child(2),
@@ -222,14 +234,6 @@ select {
 .filter-column .lumi {
   margin-left: 10px;
 }
-
-/* .plotly{
-  background-color: #C2C2C2;
-  margin: auto;
-  margin-top: 30px;
-  height: 407px;
-  width: 1223px;
-} */
 
 #map,
 #map2 {
@@ -262,6 +266,11 @@ select {
 }
 
 /* Style du tableau */
+.table_container{
+  display: flex;
+  justify-content: center;
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -281,17 +290,28 @@ tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
+.tableau {
+  font-size: 12px;
+  margin-top: 20px;
+  max-width: 1223px;
+}
+
+.button-table {
+  margin-top: 20px;
+  margin-left: 135px;
+}
+
 /* Style pour les boutons */
 .button {
   display: inline-block;
-  padding: 5px 10px;
+  padding: 8px 10px;
   background-color: #4CAF50;
   color: white;
   border: none;
   text-align: center;
   text-decoration: none;
+  font-family: "Newsreader", sans-serif;
   font-size: 12px;
-  margin-right: 5px;
   cursor: pointer;
 }
 
@@ -315,18 +335,6 @@ footer :nth-child(4) {
   padding-bottom: 20px;
 }
 
-.tableau {
-  font-size: 12px;
-  margin-left: 135px;
-  margin-top: 20px;
-  max-width: 1223px;
-}
-
-.button-table {
-  margin-top: 20px;
-  margin-left: 135px;
-}
-
 .ancien_acc {
   background-color: #f2f2f2;
 }
@@ -334,7 +342,9 @@ footer :nth-child(4) {
 .change-filter {
   border-radius: 10px;
   margin-left: 25px;
-  padding: 8px;
+  padding: 8px 16px;
+  font-family: "Newsreader", sans-serif;
+  font-size: 13.3333px;
   cursor: pointer;
   border: solid #426B1F 1px;
 }

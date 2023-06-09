@@ -1,6 +1,7 @@
 <?php
   require_once('constants.php');
 
+  //Connection à la Base de Données
   function dbConnect()
   {
     try
@@ -17,7 +18,7 @@
     return $db;
   }
 
-
+  //Ajoute un accident à la table accident(nouvel accident) de la BDD
   function dbInsertAccident($db, $horodatage, $an_nais, $insee, $lum, $athmo, $route, $dispo_secu, $cat_veh, $inter, $type_col)
   {
     try {
@@ -55,6 +56,7 @@
     }
   }
 
+  //Retourne la liste des villes
   function dbRequestCity($db)
   {
     $request = 'SELECT ville,insee FROM ville';
@@ -69,6 +71,7 @@
     }
   }
 
+  //Retourne la liste des Luminosités
   function dbRequestLum($db)
   {
     $request = 'SELECT lum FROM condition_lum';
@@ -83,6 +86,7 @@
     }
   }
 
+  //Retourne la liste des condi Atmo
   function dbRequestAthmo($db)
   {
     $request = 'SELECT athmo FROM condition_athmo';
@@ -97,6 +101,7 @@
     }
   }
 
+  //Retourne la liste des routes
   function dbRequestRoute($db)
   {
     $request = 'SELECT etat_route FROM condition_route';
@@ -111,6 +116,7 @@
     }
   }
 
+  //Retourne la liste des dispo de sécu
   function dbRequestDispo_secu($db)
   {
     $request = 'SELECT dispo_secu FROM condition_secu';
@@ -125,6 +131,7 @@
     }
   }
 
+  //Retourne la liste des catégorie de véhicule
   function dbRequestCat_veh($db)
   {
     $request = 'SELECT cat_veh FROM descr_cat_veh';
@@ -139,6 +146,7 @@
     }
   }
 
+  //Retourne la liste des intersections
   function dbRequestInter($db)
   {
     $request = 'SELECT inter FROM descr_inter';
@@ -153,6 +161,7 @@
     }
   }
 
+  //Retourne la liste des types de collisions
   function dbRequestType_col($db)
   {
     $request = 'SELECT type_col FROM descr_type_col';
@@ -166,11 +175,18 @@
       return $result;
     }
   }
-  
+
+  //Retourne la liste des anciens accidents
   function dbRequestAncienAcc($db)
   {
-    $request = "SELECT DATE_FORMAT(ac.date, \"%d/%m/%Y %H:%i\") 'date', ac.ville, ac.id_code_insee, ac.latitude, ac.longitude, ac.descr_athmo, ac.descr_lum, ac.descr_etat_surf, ac.an_nais, ac.descr_dispo_secu  FROM ancien_acc ac LIMIT 100;";
+    if(isset($_COOKIE['cookie_max'])){
+      $cookie_max = $_COOKIE['cookie_max'];
+    }else{
+      $cookie_max = 50;
+    }
+    $request = "SELECT DATE_FORMAT(ac.date, \"%d/%m/%Y %H:%i\") 'date', ac.ville, ac.id_code_insee, ac.latitude, ac.longitude, ac.descr_athmo, ac.descr_lum, ac.descr_etat_surf, ac.an_nais, ac.descr_dispo_secu  FROM ancien_acc ac LIMIT :cookie_limit;";
     $statement = $db->prepare($request);
+    $statement->bindParam(':cookie_limit', $cookie_max, PDO::PARAM_INT, 3);
     $statement->execute();
     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -184,7 +200,8 @@
     $result=$statement->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-  
+
+  //Utilisé pour le script python
   function dbRequestCluster($db) {
     $request = "SELECT v.latitude, v.longitude FROM accident ac JOIN ville v ON ac.insee = v.insee;";
     $statement = $db->prepare($request);
@@ -200,11 +217,12 @@
 
     $request_py = "python /var/www/etu110/cgi/get_input.py arguments='kmeans'," . implode("_", $lat) . "," . implode("_", $lon);
     
+    //on utilise exec pour exécuter la commande python avec les argument de request_py
     exec($request_py, $result_py);
     return $result_py;
   }
 
-  
+  //
   function dbRequestGrav($db, $id_acc) {
     $request = "SELECT cv.id 'cat_veh', i.id 'inter', tc.id 'type_col', l.id 'lum',  ac.an_naiss_conduct 'an_naiss', v.latitude, v.longitude FROM accident ac
     join descr_cat_veh cv on ac.descr_cat_veh = cv.cat_veh
@@ -217,7 +235,8 @@
     $statement->bindParam(':id_acc', $id_acc, PDO::PARAM_STR, 20);
     $statement->execute();
     $result=$statement->fetchAll(PDO::FETCH_ASSOC); 
-    
+
+    //On récupère les premieres lignes du résultat pour utiliser comme argument, argument est un tableau
     $arguments = [$result[0]["cat_veh"], $result[0]["lum"], $result[0]["inter"], $result[0]["type_col"], $result[0]["an_naiss"], $result[0]["latitude"], $result[0]["longitude"]];
 
     $request_py = "python /var/www/etu110/cgi/get_input.py arguments='classification'," . implode("_", $arguments);
